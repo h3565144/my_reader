@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141025070259) do
+ActiveRecord::Schema.define(version: 20141025164816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,10 +43,11 @@ ActiveRecord::Schema.define(version: 20141025070259) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "items", force: true do |t|
-    t.text     "text",       null: false
-    t.integer  "channel_id", null: false
+    t.text     "text",                      null: false
+    t.integer  "channel_id",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "unread",     default: true, null: false
   end
 
   add_index "items", ["channel_id"], name: "index_items_on_channel_id", using: :btree

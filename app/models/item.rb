@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
 
   belongs_to :channel
 
-  def parsed_item; @parsed_item ||= Feedjira::Parser::RSSEntry.parse(text) end
+  def rss_entry; @rss_entry ||= Feedjira::Parser::RSSEntry.parse(text) end
 
 
   #

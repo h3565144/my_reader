@@ -7,7 +7,8 @@
 $ ->
   $(document).pjax '.show-item', '#item'
   $('.show-item').on 'pjax:click', ->
-    $('.item').removeClass 'active'
-    $(@).parent().addClass 'active'
-  $('#item').bind 'pjax:end', ->
+    $('.items .item').removeClass 'active'
+    $(@).parent().addClass('active')
+  $('#item').on 'pjax:end', ->
     $(@).scrollTop(0)
+    $('.items .item.active').removeClass 'unread'

@@ -17,12 +17,9 @@ class ReaderController < ApplicationController
       end
       @channels = Channel.all
       @items = @items.order(id: :desc).page(params[:page]).per 20
-      if params[:item_id]
-        @item = @items.find params[:item_id]
-      else
-        @item = @items.first
-      end
+      @item = params[:item_id] ? @items.find(params[:item_id]) : @items.first
     end
+    @item.try :update!, unread: false
   end
 
 end

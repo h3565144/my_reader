@@ -1,13 +1,12 @@
-= form_for @channel do |f|
+= form_for @channel, html: {class: 'form-inline'} do |f|
   - if @channel.errors.any?
     #error_explanation
       %h2= "#{pluralize(@channel.errors.count, "error")} prohibited this channel from being saved:"
       %ul
         - @channel.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :url
-    = f.text_field :url
-  .actions
-    = f.submit 'Save'
+  .input-group
+    = f.text_field :url, class: 'form-control', placeholder: 'url'
+    .input-group-btn
+      %button.btn.btn-primary
+        Save
