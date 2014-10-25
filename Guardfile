@@ -9,5 +9,7 @@ group :l do
     watch(%r{config/locales/.+\.yml})
     # Rails Assets Pipeline
     watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html|png|jpg))).*}) { |m| "/assets/#{m[3]}" }
+
+    watch(%r{app/assets/javascripts/(.+)\.(js|coffee)}) { |m| "/assets/#{m[1]}.js" }
   end
 end
