@@ -1,0 +1,39 @@
+//= require_tree .
+//= require_self
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+body {
+  padding-top: 70px;
+  background: image-url('sneaker_mesh_fabric.png') fixed;
+}
+
+.feed-items {
+  .feed-item {
+    padding: 3px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 13px;
+
+    a {
+      white-space: nowrap;
+    }
+  }
+}
+
+.feed-item-area {
+  height: 100vh;
+  margin-top: -70px;
+  padding-top: 70px;
+  
+  #feed-item {
+    height: 100%;
+    overflow-y: auto;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}

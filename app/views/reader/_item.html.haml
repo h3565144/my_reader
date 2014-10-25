@@ -1,0 +1,10 @@
+- doc = item.parsed_item
+%h4.title
+  = doc.title
+%div
+  .link.pull-right
+    = link_to 'link', doc.url, target: '_blank'
+  .pub-date
+    = doc.published
+.description
+  != doc.content || doc.summary

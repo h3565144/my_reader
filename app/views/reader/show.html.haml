@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-md-2
+      = link_to 'Add', new_channel_path, class: 'pull-right'
+      = link_to 'All', reader_path
+      .feed-lists
+        - @channels.each do |channel|
+          .feed-list
+            = image_tag channel.avatar.thumb.url
+            = link_to channel.name, reader_path(channel_id: channel.id)
+            = link_to 'x', channel, :method => :delete, :data => { :confirm => "Destroy \"#{channel.name}\", Are you sure?" }, class: 'pull-right'
+    .col-md-3
+      - if params[:query]
+        = "Search: #{params[:query]}"
+      - elsif @channel
+        = @channel.name
+      - else
+        = 'All items'
+      .feed-items{'data-current-item' => @item.try(:id)}
+        - @items.each do |item|
+          .feed-item{class: ('active' if @item == item)}
+            - path = reader_path(channel_id: @channel.try(:id), item_id: item.id, query: params[:query])
+            - text = item.parsed_item.title
+            = link_to text, path, title: text, class: 'show-feed-item'
+      = paginate @items, params: {item_id: nil}
+    .col-md-7.feed-item-area
+      #feed-item
+        = render partial: 'item', locals: {item: @item} if @item
