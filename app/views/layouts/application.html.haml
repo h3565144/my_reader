@@ -8,12 +8,11 @@
   %body
     .navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .container
-        .navbar-header
-        .nav.navbar-nav.navbar-right
-        .collapse.navbar-collapse
-          %form.navbar-form.navbar-left{role: 'search'}
-            .form-group
-              %input.form-control{name: 'query', value: params[:query], type: 'text', placeholder: 'Search'}
-            %button.btn.btn-default
-              Submit
+        .col-md-7.col-md-offset-5
+          .collapse.navbar-collapse
+            %form.navbar-form.navbar-left{role: 'search'}
+              .form-group
+                %input.form-control{name: 'query', value: params[:query], type: 'text', placeholder: 'Search'}
+              %button.btn.btn-default
+                Submit
     = yield

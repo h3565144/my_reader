@@ -1,10 +1,14 @@
 - doc = item.parsed_item
 %h4.title
   = doc.title
-%div
+.info
   .link.pull-right
     = link_to 'link', doc.url, target: '_blank'
-  .pub-date
+  %span.pub-date
     = doc.published
+  - if doc.author
+    author:
+    %span.author
+      = doc.author
 .description
   != doc.content || doc.summary

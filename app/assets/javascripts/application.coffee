@@ -5,6 +5,9 @@
 #= require_tree .
 
 $ ->
-  $(document).pjax '.show-feed-item', '#feed-item'
-  $('#feed-item').bind 'pjax:end', ->
+  $(document).pjax '.show-item', '#item'
+  $('.show-item').on 'pjax:click', ->
+    $('.item').removeClass 'active'
+    $(@).parent().addClass 'active'
+  $('#item').bind 'pjax:end', ->
     $(@).scrollTop(0)

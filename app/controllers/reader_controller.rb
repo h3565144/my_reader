@@ -1,7 +1,7 @@
 class ReaderController < ApplicationController
 
   def show
-    if request.params[:_pjax] == '#feed-item'
+    if request.params[:_pjax] == '#item'
       @item = Item.find params[:item_id]
       render partial: 'item', locals: {item: @item}
     else

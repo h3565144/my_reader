@@ -9,8 +9,24 @@ body {
   background: image-url('sneaker_mesh_fabric.png') fixed;
 }
 
-.feed-items {
-  .feed-item {
+.channels {
+  .channel.active .show-channel {
+    color: black;
+  }
+}
+
+.navbar-fixed-top {
+  .navbar-form {
+    padding-left: 0;
+
+    input {
+      width: 400px;
+    }
+  }
+}
+
+.items {
+  .item {
     padding: 3px 0;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -19,18 +35,24 @@ body {
     a {
       white-space: nowrap;
     }
+    &.active .show-item {
+      color: black;
+    }
   }
 }
 
-.feed-item-area {
+.item-area {
   height: 100vh;
   margin-top: -70px;
   padding-top: 70px;
   
-  #feed-item {
+  #item {
     height: 100%;
     overflow-y: auto;
 
+    .description {
+      margin-top: 10px;
+    }
     img {
       max-width: 100%;
       height: auto;

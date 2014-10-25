@@ -3,11 +3,11 @@
     .col-md-2
       = link_to 'Add', new_channel_path, class: 'pull-right'
       = link_to 'All', reader_path
-      .feed-lists
+      .channels
         - @channels.each do |channel|
-          .feed-list
+          .channel{class: ('active' if @channel == channel)}
             = image_tag avatar_channel_path(channel, thumb: 1)
-            = link_to channel.name, reader_path(channel_id: channel.id)
+            = link_to channel.name, reader_path(channel_id: channel.id), class: 'show-channel'
             = link_to 'x', channel, :method => :delete, :data => { :confirm => "Destroy \"#{channel.name}\", Are you sure?" }, class: 'pull-right'
     .col-md-3
       - if params[:query]
@@ -16,13 +16,13 @@
         = @channel.name
       - else
         = 'All items'
-      .feed-items{'data-current-item' => @item.try(:id)}
+      .items{'data-current-item' => @item.try(:id)}
         - @items.each do |item|
-          .feed-item{class: ('active' if @item == item)}
+          .item{class: ('active' if @item == item)}
             - path = reader_path(channel_id: @channel.try(:id), item_id: item.id, query: params[:query])
             - text = item.parsed_item.title
-            = link_to text, path, title: text, class: 'show-feed-item'
+            = link_to text, path, title: text, class: 'show-item'
       = paginate @items, params: {item_id: nil}
-    .col-md-7.feed-item-area
-      #feed-item
+    .col-md-7.item-area
+      #item
         = render partial: 'item', locals: {item: @item} if @item
