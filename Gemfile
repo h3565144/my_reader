@@ -19,6 +19,7 @@ gem 'feedjira'
 
 gem 'pg'
 gem 'pg_search'
+gem 'factory_girl_rails'
 
 #assets
 gem 'sass-rails'
@@ -33,7 +34,6 @@ gem 'turbolinks'
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'factory_girl_rails'
   gem 'zeus', require: false
 end
 
