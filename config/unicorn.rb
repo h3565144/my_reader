@@ -11,7 +11,8 @@ before_fork do |server, worker|
 
   ActiveRecord::Base.connection.disconnect! if defined?(ActiveRecord::Base)
 
-  # @sidekiq_pid ||= spawn('bundle exec sidekiq -c 2')
+  @sidekiq_pid   ||= spawn 'bundle exec sidekiq -c 2'
+  @clockwork_pid ||= spawn 'bundle exec bundle exec clockwork ./config/clock.rb'
 end
 
 after_fork do |server, worker|
@@ -21,6 +22,6 @@ after_fork do |server, worker|
 
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord::Base)
 
-  # Sidekiq.configure_client { |config| config.redis = {size: 1} }
-  # Sidekiq.configure_server { |config| config.redis = {size: 5} }
+  Sidekiq.configure_client { |config| config.redis = {size: 1} }
+  Sidekiq.configure_server { |config| config.redis = {size: 5} }
 end
