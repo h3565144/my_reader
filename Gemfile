@@ -9,7 +9,7 @@ gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'eventmachine'
-gem 'sidekiq'
+gem 'delayed_job_active_record'
 gem 'clockwork'
 gem 'jbuilder'
 gem 'haml-rails'
