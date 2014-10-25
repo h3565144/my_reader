@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   root to: 'reader#show'
   
   resource :reader, controller: :reader, only: [:show]
-  resources :items
-  resources :channels
+  resources :channels, only: [:new, :create, :destroy] do
+    member do
+      get :avatar
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

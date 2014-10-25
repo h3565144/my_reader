@@ -14,4 +14,11 @@ namespace :feed do
   task clear_jobs: :environment do
     Delayed::Job.delete_all
   end
+
+  task update_channel_avatars: :environment do
+    Channel.all.each do |channel|
+      channel.set_avatar
+      channel.save!
+    end
+  end
 end

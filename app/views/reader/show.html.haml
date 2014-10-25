@@ -6,7 +6,7 @@
       .feed-lists
         - @channels.each do |channel|
           .feed-list
-            = image_tag channel.avatar.thumb.url
+            = image_tag avatar_channel_path(channel, thumb: 1)
             = link_to channel.name, reader_path(channel_id: channel.id)
             = link_to 'x', channel, :method => :delete, :data => { :confirm => "Destroy \"#{channel.name}\", Are you sure?" }, class: 'pull-right'
     .col-md-3

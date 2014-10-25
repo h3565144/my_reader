@@ -7,22 +7,7 @@ class Channel < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   before_validation :prepare_attributes
 
-  private
-  def prepare_attributes
-    return unless url
-    self.url = self.class.sanitize_url url
-    text = self.class.read_url url
-    doc = Nokogiri.parse(text).tap { |doc| doc.search('item').remove() }
-    favicon = fetch_favicon url
-    rss = Feedjira::Parser::RSS.parse(text)
-    assign_attributes(
-      avatar: favicon,
-      name:   rss.title,
-      text:   doc.to_s
-    )
-  end
-
-  def fetch_favicon(url)
+  def set_avatar
     uri = URI url
     uri.path = '/favicon.ico'
     uri.query = nil
@@ -37,7 +22,21 @@ class Channel < ActiveRecord::Base
       end
     end
     def favicon.original_filename; 'favicon.ico' end
-    favicon
+    self.avatar = favicon
+  end
+
+  private
+  def prepare_attributes
+    return unless url
+    self.url = self.class.sanitize_url url
+    text = self.class.read_url url
+    doc = Nokogiri.parse(text).tap { |doc| doc.search('item').remove() }
+    rss = Feedjira::Parser::RSS.parse(text)
+    assign_attributes(
+      name:   rss.title,
+      text:   doc.to_s
+    )
+    set_avatar
   end
 
   class << self

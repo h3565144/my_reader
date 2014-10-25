@@ -7,6 +7,7 @@ gem 'rails'
 gem 'unicorn'
 gem 'rails_12factor', group: :production
 gem 'carrierwave'
+gem 'carrierwave-postgresql'
 gem 'mini_magick'
 gem 'eventmachine'
 gem 'delayed_job_active_record'

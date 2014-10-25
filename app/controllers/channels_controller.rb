@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: [:destroy]
+  before_action :set_channel, only: [:avatar, :destroy]
 
   def new
     @channel = Channel.new
@@ -25,6 +25,12 @@ class ChannelsController < ApplicationController
       format.html { redirect_to channels_url, notice: 'Feed list was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def avatar
+    avatar = @channel.avatar
+    avatar = avatar.thumb if params[:thumb]
+    send_data avatar.file.read, type: 'image/png', disposition: 'inline'
   end
 
   private
