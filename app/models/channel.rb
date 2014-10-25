@@ -62,13 +62,6 @@ class Channel < ActiveRecord::Base
   has_many :items, dependent: :destroy
 
   public
-  def self.fetch_items(worker_index, worker_count)
-    channel = where('id % ? = ?', worker_count, worker_index)
-      .where('fetched_at IS NULL OR fetched_at < ?', 1.minutes.ago)
-      .order(fetched_at: :asc).first
-    channel.try :fetch_items
-  end
-
   def fetch_items
     if item = items.order(id: :desc).first
       last_pub = Feedjira::Parser::RSSEntry.parse(item.text).published
