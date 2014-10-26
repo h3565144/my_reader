@@ -4,7 +4,6 @@ namespace :feed do
   end
 
   task start_workers: :environment do
-    Delayed::Job.delete_all
     3.times do
       Delayed::Worker.new(min_priority: ENV['MIN_PRIORITY'], 
         max_priority: ENV['MAX_PRIORITY']).start
