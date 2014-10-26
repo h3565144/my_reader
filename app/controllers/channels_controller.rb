@@ -7,24 +7,16 @@ class ChannelsController < ApplicationController
 
   def create
     @channel = Channel.new(channel_params)
-
-    respond_to do |format|
-      if @channel.save
-        format.html { redirect_to reader_path, notice: 'Feed list was successfully created.' }
-        format.json { render :show, status: :created, location: @channel }
-      else
-        format.html { render :new }
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
-      end
+    if @channel.save
+      redirect_to reader_url, notice: 'Feed list was successfully created.'
+    else
+      render :new 
     end
   end
 
   def destroy
     @channel.destroy
-    respond_to do |format|
-      format.html { redirect_to channels_url, notice: 'Feed list was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to reader_url, notice: 'Feed list was successfully destroyed.'
   end
 
   def avatar
