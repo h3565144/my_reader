@@ -6,6 +6,7 @@ class Channel < ActiveRecord::Base
   #
   mount_uploader :avatar, AvatarUploader
   before_validation :prepare_attributes
+  validates :url, uniqueness: true
 
   def set_avatar
     uri = URI url
@@ -60,6 +61,7 @@ class Channel < ActiveRecord::Base
   #items association
   #
   has_many :items, dependent: :destroy
+  after_create :enqueue_fetch_items
 
   public
   def fetch_items
@@ -78,6 +80,11 @@ class Channel < ActiveRecord::Base
       end
       update_column(:fetched_at, Time.now)
     end
+  end
+
+  private
+  def enqueue_fetch_items
+    Delayed::Job.enqueue FetchFeedJob.new(id)
   end
 
 end
