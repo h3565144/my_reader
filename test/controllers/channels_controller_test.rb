@@ -20,6 +20,6 @@ class ChannelsControllerTest < ActionController::TestCase
       delete :destroy, id: channel
     end
 
-    assert_redirected_to channels_path
+    assert_redirected_to reader_path
   end
 end
